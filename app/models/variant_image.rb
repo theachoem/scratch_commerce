@@ -1,0 +1,2 @@
+class VariantImage < Asset
+end

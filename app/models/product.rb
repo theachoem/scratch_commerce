@@ -1,5 +1,7 @@
 class Product < ApplicationRecord
+  include SoftDeletable
   extend FriendlyId
+
   friendly_id :name, use: :history
 
   enum :status, [ :draft, :active, :archived ], default: :draft
