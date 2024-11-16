@@ -1,7 +1,6 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  option_texts: MyString
   markup: 9.99
   cost_price: 9.99
   currency: MyString
@@ -10,7 +9,6 @@ one:
   position: 1
 
 two:
-  option_texts: MyString
   markup: 9.99
   cost_price: 9.99
   currency: MyString
