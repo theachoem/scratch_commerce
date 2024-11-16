@@ -1,13 +1,13 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
+  name: MyString1
   presentation: MyString
   position: 1
   option_type: one
 
 two:
-  name: MyString
+  name: MyString2
   presentation: MyString
   position: 1
   option_type: two
