@@ -1,0 +1,2 @@
+class ShippingCategory < ApplicationRecord
+end

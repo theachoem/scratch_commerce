@@ -1,0 +1,2 @@
+class PromotionCategory < ApplicationRecord
+end

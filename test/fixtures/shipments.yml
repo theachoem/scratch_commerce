@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  state: MyString
+  tracking: MyString
+  number: MyString1
+  subtotal: 9.99
+  adjustment_total: 9.99
+  total: 9.99
+  currency: MyString
+  order: one
+  stock_location: one
+
+two:
+  state: MyString
+  tracking: MyString
+  number: MyString2
+  subtotal: 9.99
+  adjustment_total: 9.99
+  total: 9.99
+  currency: MyString
+  order: two
+  stock_location: two

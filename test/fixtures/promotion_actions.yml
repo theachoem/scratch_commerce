@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  type: PromotionAction
+  promotion: one
+  position: 1
+  preferences: 
+  deleted_at: 2024-11-16 22:15:55
+
+two:
+  type: PromotionAction
+  promotion: two
+  position: 1
+  preferences: 
+  deleted_at: 2024-11-16 22:15:55

@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  stock_location: one
+  variant: one
+  inventory_units: 1
+  printed_units: 1
+  backorderable: false
+  deleted_at: 2024-11-16 20:21:36
+
+two:
+  stock_location: two
+  variant: two
+  inventory_units: 1
+  printed_units: 1
+  backorderable: false
+  deleted_at: 2024-11-16 20:21:36

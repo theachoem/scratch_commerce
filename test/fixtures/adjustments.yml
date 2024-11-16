@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  source: one
+  source_type: Source
+  adjustable: one
+  adjustable_type: Adjustable
+  order: one
+  amount: 1
+  currency: MyString
+  included: false
+
+two:
+  source: two
+  source_type: Source
+  adjustable: two
+  adjustable_type: Adjustable
+  order: two
+  amount: 1
+  currency: MyString
+  included: false

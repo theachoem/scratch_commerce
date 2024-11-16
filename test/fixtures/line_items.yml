@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  variant: one
+  order: one
+  quantity: 1
+  unit_price: 9.99
+  subtotal: 9.99
+  adjustment_total: 9.99
+  total: 9.99
+  currency: MyString
+
+two:
+  variant: two
+  order: two
+  quantity: 1
+  unit_price: 9.99
+  subtotal: 9.99
+  adjustment_total: 9.99
+  total: 9.99
+  currency: MyString

@@ -1,0 +1,49 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  number: MyString1
+  state: MyString
+  shipment_state: MyString
+  payment_state: MyString
+  email: MyString
+  user: one
+  store: one
+  currency: MyString
+  subtotal: 9.99
+  adjustment_total: 9.99
+  total: 9.99
+  paid_total: 9.99
+  guest_token: MyString1
+  item_count: 1
+  channel: MyString
+  special_instructions: MyText
+  approver_id: 1
+  approved_at: 2024-11-16 21:13:59
+  canceler_id: 1
+  canceled_at: 2024-11-16 21:13:59
+  billing_address_id: 1
+  shipping_address_id: 1
+
+two:
+  number: MyString2
+  state: MyString
+  shipment_state: MyString
+  payment_state: MyString
+  email: MyString
+  user: two
+  store: two
+  currency: MyString
+  subtotal: 9.99
+  adjustment_total: 9.99
+  total: 9.99
+  paid_total: 9.99
+  guest_token: MyString2
+  item_count: 1
+  channel: MyString
+  special_instructions: MyText
+  approver_id: 1
+  approved_at: 2024-11-16 21:13:59
+  canceler_id: 1
+  canceled_at: 2024-11-16 21:13:59
+  billing_address_id: 1
+  shipping_address_id: 1
