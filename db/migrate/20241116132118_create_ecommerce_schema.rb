@@ -42,7 +42,6 @@ class CreateEcommerceSchema < ActiveRecord::Migration[8.0]
     end
 
     create_table :variants do |t|
-      t.string :option_texts
       t.decimal :markup, default: 0, null: false
       t.decimal :cost_price, precision: 8, scale: 2, default: 0, null: false
       t.string :currency, null: false

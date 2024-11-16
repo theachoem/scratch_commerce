@@ -66,6 +66,7 @@ group :test do
   gem "selenium-webdriver"
   gem "rspec-rails"
   gem "shoulda-matchers"
+  gem "factory_bot_rails"
 end
 
 gem "tailwindcss-rails", "~> 3.0"

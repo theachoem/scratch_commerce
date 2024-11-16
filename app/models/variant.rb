@@ -22,6 +22,8 @@ class Variant < ApplicationRecord
 
   before_validation :set_currency
 
+  after_save :clear_option_texts_cache
+
   after_discard do
     stock_items.discard_all
   end
@@ -36,6 +38,16 @@ class Variant < ApplicationRecord
 
   def backorderable?
     stock_items.any?(&:backorderable)
+  end
+
+  def clear_option_texts_cache = Rails.cache.delete(option_texts_cache_key)
+  def option_texts_cache_key = "variant_#{id}_option_texts"
+  def option_texts
+    Rails.cache.fetch(option_texts_cache_key) do
+      option_values.includes(:option_type).map do |value|
+        "#{value.option_type.presentation}: #{value.presentation}"
+      end.join(", ")
+    end
   end
 
   private

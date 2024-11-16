@@ -116,6 +116,11 @@ GEM
     erubi (1.13.0)
     et-orbi (1.2.11)
       tzinfo
+    factory_bot (6.2.1)
+      activesupport (>= 5.0.0)
+    factory_bot_rails (6.2.0)
+      factory_bot (~> 6.2.0)
+      railties (>= 5.0.0)
     friendly_id (5.5.1)
       activerecord (>= 4.0.0)
     fugit (1.11.1)
@@ -403,6 +408,7 @@ DEPENDENCIES
   capybara
   debug
   discard
+  factory_bot_rails
   friendly_id
   importmap-rails
   jbuilder

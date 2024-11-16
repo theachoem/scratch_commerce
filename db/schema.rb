@@ -533,7 +533,6 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_16_150258) do
   end
 
   create_table "variants", force: :cascade do |t|
-    t.string "option_texts"
     t.decimal "markup", default: "0.0", null: false
     t.decimal "cost_price", precision: 8, scale: 2, default: "0.0", null: false
     t.string "currency", null: false
