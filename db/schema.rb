@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_11_16_150258) do
+ActiveRecord::Schema[8.0].define(version: 2024_11_23_163425) do
   create_table "addresses", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
@@ -108,6 +108,27 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_16_150258) do
     t.datetime "updated_at", null: false
     t.index ["order_id"], name: "index_line_items_on_order_id"
     t.index ["variant_id"], name: "index_line_items_on_variant_id"
+  end
+
+  create_table "merchant_users", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "merchant_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["merchant_id"], name: "index_merchant_users_on_merchant_id"
+    t.index ["user_id"], name: "index_merchant_users_on_user_id"
+  end
+
+  create_table "merchants", force: :cascade do |t|
+    t.string "name"
+    t.integer "status", default: 0, null: false
+    t.decimal "commission_rate", default: "0.0", null: false
+    t.string "slug", null: false
+    t.datetime "deleted_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["deleted_at"], name: "index_merchants_on_deleted_at"
+    t.index ["slug"], name: "index_merchants_on_slug", unique: true
   end
 
   create_table "option_type_products", force: :cascade do |t|
@@ -240,8 +261,10 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_16_150258) do
     t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "merchant_id", null: false
     t.index ["available_on"], name: "index_products_on_available_on"
     t.index ["deleted_at"], name: "index_products_on_deleted_at"
+    t.index ["merchant_id"], name: "index_products_on_merchant_id"
     t.index ["slug"], name: "index_products_on_slug", unique: true
   end
 
@@ -570,6 +593,8 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_16_150258) do
   add_foreign_key "inventory_units", "variants"
   add_foreign_key "line_items", "orders"
   add_foreign_key "line_items", "variants"
+  add_foreign_key "merchant_users", "merchants"
+  add_foreign_key "merchant_users", "users"
   add_foreign_key "option_type_products", "option_types"
   add_foreign_key "option_type_products", "products"
   add_foreign_key "option_value_variants", "option_values"
@@ -581,6 +606,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_16_150258) do
   add_foreign_key "payments", "payment_methods"
   add_foreign_key "product_properties", "products"
   add_foreign_key "product_properties", "properties"
+  add_foreign_key "products", "merchants"
   add_foreign_key "promotion_actions", "promotions"
   add_foreign_key "promotion_rules", "promotions"
   add_foreign_key "promotions", "promotion_categories"

@@ -5,5 +5,6 @@ FactoryBot.define do
     description { "As seen on TV!" }
     available_on { 1.year.ago }
     deleted_at { nil }
+    merchant
   end
 end

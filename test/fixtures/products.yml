@@ -5,6 +5,7 @@ one:
   status: 1
   description: MyText
   slug: MyString1
+  merchant: one
   available_on: 2024-11-16 20:21:20
   discontinued_on: 2024-11-16 20:21:20
   deleted_at: 2024-11-16 20:21:20
@@ -14,6 +15,7 @@ two:
   status: 1
   description: MyText
   slug: MyString2
+  merchant: two
   available_on: 2024-11-16 20:21:20
   discontinued_on: 2024-11-16 20:21:20
   deleted_at: 2024-11-16 20:21:20

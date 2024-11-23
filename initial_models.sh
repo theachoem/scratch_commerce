@@ -323,6 +323,16 @@ rm db/schema.rb
 #   deleted_at:datetime:index \
 #   --force
 
+# bin/rails g model Merchant \
+#   name:string \
+#   slug:references \
+#   --force
+
+# bin/rails g model MerchantUser \
+#   user:references \
+#   merchant:references \
+#   --force
+
 bin/rails db:migrate
 bin/rails db:seed
 

@@ -7,6 +7,8 @@ class Product < ApplicationRecord
 
   enum :status, [ :draft, :active, :archived ], default: :draft
 
+  belongs_to :merchant
+
   has_many :variants, -> { order(:position) }
 
   has_many :option_type_products, -> { order(:position) }, dependent: :destroy
@@ -20,6 +22,7 @@ class Product < ApplicationRecord
 
   validates_presence_of :name
   validates_presence_of :status
+  validates_presence_of :merchant
   validates :slug, presence: true, uniqueness: true
 
   before_validation :normalize_slug, on: :update
