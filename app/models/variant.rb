@@ -18,7 +18,7 @@ class Variant < ApplicationRecord
   validates :cost_price, presence: true
   validates :markup, presence: true
   validates :cost_price, numericality: { greater_than_or_equal_to: 0 }
-  validates :markup, numericality: { greater_than_or_equal_to: 0 }
+  validates :markup, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 100 }
 
   before_validation :set_currency
 

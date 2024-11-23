@@ -5,12 +5,23 @@ RSpec.describe Merchant, type: :model do
 
   describe 'associations' do
     it { should have_many(:products) }
+    it { should have_many(:merchant_users) }
+    it { should have_many(:users).through(:merchant_users) }
   end
 
   describe 'validations' do
     it { should validate_presence_of(:name) }
     it { should validate_presence_of(:status) }
+    it { should validate_presence_of(:commission_rate) }
     it { should validate_uniqueness_of(:slug) }
+
+    context 'when commission_rate is less than 0' do
+      it { should_not allow_value(-1).for(:commission_rate) }
+    end
+
+    context 'when commission_rate is greater than 100' do
+      it { should_not allow_value(101).for(:commission_rate) }
+    end
   end
 
   describe 'callbacks' do

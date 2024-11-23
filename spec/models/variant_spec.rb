@@ -11,6 +11,20 @@ RSpec.describe Variant, type: :model do
   it { should have_many(:line_items) }
   it { should have_many(:orders).through(:line_items) }
 
+  describe 'validation' do
+    it { should validate_presence_of(:product) }
+    it { should validate_presence_of(:cost_price) }
+    it { should validate_presence_of(:markup) }
+
+    context 'when markup is less than 0' do
+      it { should_not allow_value(-1).for(:markup) }
+    end
+
+    context 'when markup is greater than 100' do
+      it { should_not allow_value(101).for(:markup) }
+    end
+  end
+
   describe '#option_texts' do
     let(:option_type) { create(:option_type, presentation: 'Color') }
     let(:option_value) { create(:option_value, presentation: 'Red', option_type: option_type) }
