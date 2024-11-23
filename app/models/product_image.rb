@@ -1,0 +1,2 @@
+class ProductImage < Asset
+end
