@@ -21,14 +21,14 @@ RSpec.describe OptionValue, type: :model do
     let(:product) { create(:product, option_types: [ option_type ]) }
     let(:variant) { create(:variant, product: product, option_values: [ option_value ]) }
 
-    it 'calls clear_variant_option_texts_cache after save' do
+    it 'calls reload_variant_option_texts_cache after commit' do
       expect(variant.option_texts).to eq "Color: Red"
       expect(Rails.cache.fetch(variant.option_texts_cache_key)).to eq "Color: Red"
 
-      expect(option_value).to receive(:clear_variant_option_texts_cache).and_call_original
+      expect(option_value).to receive(:reload_variant_option_texts_cache).and_call_original
       option_value.update!(presentation: 'Blue')
 
-      expect(Rails.cache.fetch(variant.option_texts_cache_key)).to eq nil
+      expect(Rails.cache.fetch(variant.option_texts_cache_key)).to eq "Color: Blue"
       expect(variant.option_texts).to eq "Color: Blue"
     end
   end

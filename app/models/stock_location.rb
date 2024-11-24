@@ -1,4 +1,4 @@
 class StockLocation < ApplicationRecord
-  belongs_to :province
-  belongs_to :country
+  belongs_to :province, optional: false
+  belongs_to :country, optional: false
 end

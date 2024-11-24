@@ -22,7 +22,9 @@ class Variant < ApplicationRecord
 
   before_validation :set_currency
 
-  after_save :clear_option_texts_cache
+  after_save :reload_option_texts_cache
+  after_save :reload_total_inventory_units_cache
+  after_save :reload_backorderable_cache
 
   after_discard do
     stock_items.discard_all
@@ -32,15 +34,33 @@ class Variant < ApplicationRecord
     stock_items.undiscard_all
   end
 
-  def in_stock?
-    stock_items.sum(:inventory_units) > 0
+  def unit_price
+    cost_price * markup / 100
   end
 
-  def backorderable?
-    stock_items.any?(&:backorderable)
+  def unit_price_for(currency)
+    return unit_price if currency == self.currency
+    throw :unsupported
   end
 
-  def clear_option_texts_cache = Rails.cache.delete(option_texts_cache_key)
+  def can_fulfill?(quantity, options = {})
+    return true if backorderable?
+    return true if total_inventory_units >= quantity
+
+    false
+  end
+
+  def in_stock? = total_inventory_units > 0
+
+  def reload_total_inventory_units_cache = delete_cache_if_exist(total_inventory_units_cache_key) && total_inventory_units
+  def total_inventory_units_cache_key = "variant_#{id}_total_inventory_units"
+  def total_inventory_units = Rails.cache.fetch(total_inventory_units_cache_key) { stock_items.sum(:inventory_units) }
+
+  def reload_backorderable_cache = delete_cache_if_exist(backorderable_cache_key) && backorderable?
+  def backorderable_cache_key = "variant_#{id}_backorderable"
+  def backorderable? = Rails.cache.fetch(backorderable_cache_key) { stock_items.any?(&:backorderable) }
+
+  def reload_option_texts_cache = delete_cache_if_exist(option_texts_cache_key) && option_texts
   def option_texts_cache_key = "variant_#{id}_option_texts"
   def option_texts
     Rails.cache.fetch(option_texts_cache_key) do
@@ -51,6 +71,11 @@ class Variant < ApplicationRecord
   end
 
   private
+
+  def delete_cache_if_exist(cache_key)
+    Rails.cache.delete(cache_key)
+    true
+  end
 
   def set_currency
     self.currency = "USD" if currency.blank?

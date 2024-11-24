@@ -1,8 +1,10 @@
 require "number_generator"
 
 class Order < ApplicationRecord
+  enum :state, { cart: 0, address: 1, payment: 2, completed: 3 }
+
   belongs_to :user, optional: true
-  belongs_to :store
+  belongs_to :store, optional: false
 
   has_many :line_items, dependent: :destroy
   has_many :shipments, dependent: :destroy
@@ -19,7 +21,6 @@ class Order < ApplicationRecord
   belongs_to :approver, class_name: User.name, optional: true
   belongs_to :canceler, class_name: User.name, optional: true
 
-  validates :store, presence: true
   validates :email, presence: true, if: :email_required?
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }, if: :email_required?
   validates :guest_token, uniqueness: true, presence: true
@@ -34,6 +35,10 @@ class Order < ApplicationRecord
 
   def email_required?
     false
+  end
+
+  def allowed_add_item?
+    cart? || address?
   end
 
   private

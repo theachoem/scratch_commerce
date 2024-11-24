@@ -11,9 +11,9 @@ class OptionValue < ApplicationRecord
 
   before_validation -> { self.name = self.name.downcase if name.present? }
 
-  after_save :clear_variant_option_texts_cache
+  after_commit :reload_variant_option_texts_cache
 
-  def clear_variant_option_texts_cache
-    variants.find_each(&:clear_option_texts_cache)
+  def reload_variant_option_texts_cache
+    variants.find_each(&:reload_option_texts_cache)
   end
 end

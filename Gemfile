@@ -59,6 +59,7 @@ group :development, :test do
 
   # [https://github.com/ffaker/ffaker/blob/main/REFERENCE.md]
   gem "ffaker"
+  gem "byebug"
 end
 
 group :development do
