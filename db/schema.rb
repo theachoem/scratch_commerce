@@ -23,8 +23,8 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_23_163425) do
     t.string "alt_phone_number"
     t.string "alt_phone_number_intl"
     t.string "country_code"
-    t.integer "province_id", null: false
-    t.integer "country_id", null: false
+    t.integer "province_id"
+    t.integer "country_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["country_id"], name: "index_addresses_on_country_id"
@@ -120,7 +120,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_23_163425) do
   end
 
   create_table "merchants", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.integer "status", default: 0, null: false
     t.decimal "commission_rate", default: "0.0", null: false
     t.string "slug", null: false
@@ -179,7 +179,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_23_163425) do
     t.string "shipment_state"
     t.string "payment_state"
     t.string "email"
-    t.integer "user_id", null: false
+    t.integer "user_id"
     t.integer "store_id", null: false
     t.string "currency", null: false
     t.decimal "subtotal", precision: 10, scale: 2, default: "0.0", null: false
@@ -461,10 +461,10 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_23_163425) do
   end
 
   create_table "stores", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.string "url"
-    t.string "default_currency"
-    t.boolean "is_default"
+    t.string "default_currency", null: false
+    t.boolean "is_default", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["is_default"], name: "index_stores_on_is_default"
@@ -548,11 +548,13 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_23_163425) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "email_address", null: false
+    t.string "first_name"
+    t.string "last_name"
+    t.string "email", null: false
     t.string "password_digest", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["email_address"], name: "index_users_on_email_address", unique: true
+    t.index ["email"], name: "index_users_on_email", unique: true
   end
 
   create_table "variants", force: :cascade do |t|

@@ -143,8 +143,8 @@ class CreateEcommerceSchema < ActiveRecord::Migration[8.0]
 
       t.string :country_code
 
-      t.references :province, null: false, foreign_key: true
-      t.references :country, null: false, foreign_key: true
+      t.references :province, foreign_key: true
+      t.references :country, foreign_key: true
 
       t.timestamps
     end
@@ -182,10 +182,10 @@ class CreateEcommerceSchema < ActiveRecord::Migration[8.0]
     end
 
     create_table :stores do |t|
-      t.string :name
+      t.string :name, null: false
       t.string :url
-      t.string :default_currency
-      t.boolean :is_default, index: true
+      t.string :default_currency, null: false
+      t.boolean :is_default, index: true, null: false
 
       t.timestamps
     end
@@ -197,7 +197,7 @@ class CreateEcommerceSchema < ActiveRecord::Migration[8.0]
       t.string :payment_state
       t.string :email
 
-      t.references :user, null: false, foreign_key: true
+      t.references :user, foreign_key: true
       t.references :store, null: false, foreign_key: true
 
       t.string :currency, null: false

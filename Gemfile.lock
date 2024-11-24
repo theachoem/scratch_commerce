@@ -121,6 +121,7 @@ GEM
     factory_bot_rails (6.4.4)
       factory_bot (~> 6.5)
       railties (>= 5.0.0)
+    ffaker (2.23.0)
     friendly_id (5.5.1)
       activerecord (>= 4.0.0)
     fugit (1.11.1)
@@ -134,6 +135,7 @@ GEM
       actionpack (>= 6.0.0)
       activesupport (>= 6.0.0)
       railties (>= 6.0.0)
+    interactor (3.1.2)
     io-console (0.7.2)
     irb (1.14.1)
       rdoc (>= 4.0.0)
@@ -200,6 +202,7 @@ GEM
     parser (3.3.6.0)
       ast (~> 2.4.1)
       racc
+    phonelib (0.10.1)
     propshaft (1.1.0)
       actionpack (>= 7.0.0)
       activesupport (>= 7.0.0)
@@ -409,10 +412,13 @@ DEPENDENCIES
   debug
   discard
   factory_bot_rails
+  ffaker
   friendly_id
   importmap-rails
+  interactor
   jbuilder
   kamal
+  phonelib
   propshaft
   puma (>= 5.0)
   rails (~> 8.0.0)

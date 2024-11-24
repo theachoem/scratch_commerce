@@ -2,8 +2,10 @@ class User < ApplicationRecord
   has_secure_password
 
   has_many :sessions, dependent: :destroy
-  has_many :merchant_users
+  has_many :merchant_users, dependent: :destroy
   has_many :merchants, through: :merchant_users
 
-  normalizes :email_address, with: ->(e) { e.strip.downcase }
+  validates :email, presence: true, uniqueness: true
+
+  normalizes :email, with: ->(e) { e.strip.downcase }
 end
