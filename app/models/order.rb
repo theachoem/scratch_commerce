@@ -37,7 +37,7 @@ class Order < ApplicationRecord
     false
   end
 
-  def allowed_add_item?
+  def allowed_modify_item?
     cart? || address?
   end
 

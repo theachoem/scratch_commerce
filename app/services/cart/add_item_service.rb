@@ -35,10 +35,10 @@ module Cart
 
       # 8 db operation
       order = Order.find(order_id)
-      raise CartDoesNotAllowedToAddItem, "Current cart #{cart.state}" if order.allowed_add_item?
+      raise CartDoesNotAllowedToAddItem, "Current cart #{order.state}" if order.allowed_modify_item?
 
       # 1 db operation
-      order.line_items <<  construct_item(order, variant, quantity)
+      order.line_items << construct_item(order, variant, quantity)
 
       # 4 db operation
       RecalculateService.new(order_id: order_id).call

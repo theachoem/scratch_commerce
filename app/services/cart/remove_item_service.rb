@@ -1,11 +1,11 @@
 module Cart
   class RemoveItemService
-    attr_reader :order_id, :line_item_id, :error
+    attr_reader :order_id, :variant_id, :error
 
     def success? = @error == nil
     def initialize(order_id:, options: {})
       @order_id = order_id
-      @line_item_id = options[:line_item_id]
+      @variant_id = options[:variant_id]
       @error = nil
     end
 
@@ -25,8 +25,12 @@ module Cart
     private
 
     def remove_item
+      # 1 db operation
+      order = Order.find(order_id)
+      raise CartDoesNotAllowedToAddItem, "Current cart #{order.state}" if order.allowed_modify_item?
+
       # 2 db operation
-      LineItem.where(order_id: order_id, id: line_item_id).delete_all
+      order.line_items.where(variant_id: variant_id).delete_all
 
       # 5 db operation
       RecalculateService.new(order_id: order_id).call

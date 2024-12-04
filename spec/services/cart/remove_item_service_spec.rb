@@ -10,14 +10,14 @@ RSpec.describe Cart::RemoveItemService do
   end
 
   describe '#call' do
-    it 'perform 7 db query' do
+    it 'perform 8 db query' do
       line_item = order.line_items.first
 
-      subject = described_class.new(order_id: order.id, options: { line_item_id: line_item.id })
+      subject = described_class.new(order_id: order.id, options: { variant_id: line_item.variant_id })
       query_count = count_queries { subject.call }
 
       expect(order.line_items.size).to eq 0
-      expect(query_count).to eq 7
+      expect(query_count).to eq 8
     end
   end
 
