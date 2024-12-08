@@ -1,2 +1,0 @@
-class VariantImage < Asset
-end

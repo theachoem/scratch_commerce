@@ -26,6 +26,9 @@ stock_location = province.stock_locations.create!(name: "MyMerchant Warehouse", 
 merchant = Merchant.create!(name: "MyMerchant", status: :active, commission_rate: 0, users: [ merchant_user ])
 product = Product.create!(name: "TShirt", merchant: merchant, status: :active, option_types: [ size_option_type ])
 
+image_file = Rails.root.join('public/icon.png')
+product.images.attach(io: File.open(image_file), filename: File.basename(image_file))
+
 variant_a = product.variants.create!(option_values: [ red_option_value ])
 variant_b = product.variants.create!(option_values: [ blue_option_value ])
 variant_c = product.variants.create!(option_values: [ black_option_value ])

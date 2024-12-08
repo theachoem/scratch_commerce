@@ -4,7 +4,7 @@ RSpec.describe Variant, type: :model do
   let!(:default_store) { create(:store, is_default: true) }
 
   it { should belong_to(:product) }
-  it { should have_many(:variant_images).order(:position).dependent(:destroy) }
+  it { should have_many_attached(:images) }
   it { should have_many(:option_value_variants).order(:position) }
   it { should have_many(:option_values).through(:option_value_variants) }
   it { should have_many(:inventory_units) }

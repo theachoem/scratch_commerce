@@ -5,7 +5,7 @@ class Variant < ApplicationRecord
 
   belongs_to :product
 
-  has_many :variant_images, -> { order(:position) }, as: :viewable, dependent: :destroy
+  has_many_attached :images
   has_many :option_value_variants, -> { order(:position) }
   has_many :option_values, through: :option_value_variants
   has_many :stock_items

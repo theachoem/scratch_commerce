@@ -5,7 +5,7 @@ RSpec.describe Product, type: :model do
 
   describe 'associations' do
     it { should have_many(:variants).order(:position) }
-    it { should have_many(:product_images).order(:position) }
+    it { should have_many_attached(:images) }
     it { should have_many(:option_type_products).order(:position) }
     it { should have_many(:option_types).through(:option_type_products) }
     it { should have_many(:taxon_products).order(:position) }

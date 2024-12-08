@@ -17,18 +17,6 @@ class CreateEcommerceSchema < ActiveRecord::Migration[8.0]
       t.timestamps
     end
 
-    create_table :assets do |t|
-      t.string :type, limit: 75
-      t.references :viewable, polymorphic: true, null: false
-      t.string :alt
-      t.integer :width
-      t.integer :height
-      t.integer :file_size
-      t.integer :position, default: 0, null: false, index: true
-
-      t.timestamps
-    end
-
     create_table :products do |t|
       t.string :name, null: false
       t.integer :status, default: 0, null: false

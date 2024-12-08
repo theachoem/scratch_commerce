@@ -23,9 +23,12 @@ RSpec.describe Cart::AddItemService do
         subject = described_class.new(order_id: order.id, options: { variant_id: variant.id, quantity: 2 })
         subject.call
 
+        order.reload
+
         expect(subject.success?).to be true
         expect(order.line_items.last.variant).to eq variant
-        expect(order.line_items.last.quantity).to eq 2
+        expect(order.line_items.last.variant).to eq variant
+        expect(order.item_count).to eq 1
       end
     end
 

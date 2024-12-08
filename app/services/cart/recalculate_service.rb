@@ -29,6 +29,7 @@ module Cart
 
       # 0 db operation
       order.assign_attributes(
+        item_count: order.line_items.size,
         payment_state: nil,
         currency: order.currency || order.store.default_currency,
         subtotal: order.line_items.sum(&:total),

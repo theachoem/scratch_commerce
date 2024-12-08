@@ -10,7 +10,7 @@ class Product < ApplicationRecord
   belongs_to :merchant
 
   has_many :variants, -> { order(:position) }
-  has_many :product_images, -> { order(:position) }, as: :viewable, dependent: :destroy
+  has_many_attached :images
 
   has_many :option_type_products, -> { order(:position) }, dependent: :destroy
   has_many :option_types, through: :option_type_products
