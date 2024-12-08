@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   has_secure_password
 
+  has_many :user_roles
+  has_many :roles, through: :user_roles
   has_many :sessions, dependent: :destroy
   has_many :merchant_users, dependent: :destroy
   has_many :merchants, through: :merchant_users

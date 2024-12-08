@@ -192,7 +192,7 @@ class CreateEcommerceSchema < ActiveRecord::Migration[8.0]
 
     create_table :orders do |t|
       t.string :number, limit: 32, index: { unique: true }
-      t.string :state, null: false
+      t.integer :state, null: false, default: 0
       t.string :shipment_state
       t.string :payment_state
       t.string :email

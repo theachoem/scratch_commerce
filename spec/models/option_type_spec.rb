@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe OptionType, type: :model do
+  let!(:default_store) { create(:store, is_default: true) }
+
   describe 'associations' do
     it { should have_many(:option_type_products) }
     it { should have_many(:products).through(:option_type_products) }

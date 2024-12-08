@@ -32,12 +32,12 @@ module Cart
 
       # 1 db operation
       order = Order.find(order_id)
-      raise CartDoesNotAllowedToAddItem, "Current cart #{order.state}" if order.allowed_modify_item?
+      raise CartDoesNotAllowedToAddItem, "Current cart #{order.state}" unless order.allowed_modify_item?
 
       # 1 db operation
       order.line_items.where(variant_id: variant_id).update_all(quantity: quantity)
 
-      # 6 db operation
+      # 5 db operation
       RecalculateService.new(order_id: order_id).call
     end
   end

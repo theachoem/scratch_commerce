@@ -20,7 +20,7 @@ class Variant < ApplicationRecord
   validates :cost_price, numericality: { greater_than_or_equal_to: 0 }
   validates :markup, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 100 }
 
-  before_validation :set_currency
+  before_validation :set_currency, if: -> { currency.blank? }
 
   after_save :reload_option_texts_cache
   after_save :reload_total_inventory_units_cache
@@ -78,6 +78,6 @@ class Variant < ApplicationRecord
   end
 
   def set_currency
-    self.currency = "USD" if currency.blank?
+    self.currency = Store.default.default_currency
   end
 end

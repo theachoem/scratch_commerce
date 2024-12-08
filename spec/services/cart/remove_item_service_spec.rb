@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Cart::RemoveItemService do
+  let!(:default_store) { create(:store, is_default: true) }
   let(:stock_item) { create(:stock_item, inventory_units: 4) }
   let(:variant) { create(:variant, stock_items: [ stock_item ]) }
   let(:order) { create(:order) }

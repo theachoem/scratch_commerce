@@ -1,7 +1,7 @@
 require "number_generator"
 
 class Order < ApplicationRecord
-  enum :state, { cart: 0, address: 1, payment: 2, completed: 3 }
+  enum :state, { cart: 0, address: 1, payment: 2, completed: 3 }, default: :cart
 
   belongs_to :user, optional: true
   belongs_to :store, optional: false
@@ -28,6 +28,7 @@ class Order < ApplicationRecord
 
   before_validation :associate_default_store, if: -> { store_id.blank? }
   before_validation :set_currency, if: -> { currency.blank? }
+  before_validation :set_channel, if: -> { channel.blank? }
 
   before_validation :generate_order_number, on: :create
   before_validation :create_token, on: :create
@@ -60,6 +61,10 @@ class Order < ApplicationRecord
 
   def set_currency
     self.currency ||= store.default_currency
+  end
+
+  def set_channel
+    self.channel ||= "default"
   end
 
   def link_by_email

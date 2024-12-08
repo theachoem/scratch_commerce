@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Cart::SetQuantityService do
+  let!(:default_store) { create(:store, is_default: true) }
   let(:stock_item) { create(:stock_item, inventory_units: 4) }
   let(:variant) { create(:variant, stock_items: [ stock_item ]) }
 
@@ -11,7 +12,7 @@ RSpec.describe Cart::SetQuantityService do
   end
 
   describe '#call' do
-    it 'perform 9 db query' do
+    it 'perform 8 db query' do
       subject = described_class.new(order_id: order.id, options: { variant_id: variant.id, quantity: 2 })
       query_count = count_queries { subject.call }
 

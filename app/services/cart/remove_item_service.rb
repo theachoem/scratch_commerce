@@ -27,7 +27,7 @@ module Cart
     def remove_item
       # 1 db operation
       order = Order.find(order_id)
-      raise CartDoesNotAllowedToAddItem, "Current cart #{order.state}" if order.allowed_modify_item?
+      raise CartDoesNotAllowedToAddItem, "Current cart #{order.state}" unless order.allowed_modify_item?
 
       # 2 db operation
       order.line_items.where(variant_id: variant_id).delete_all

@@ -175,7 +175,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_23_163425) do
 
   create_table "orders", force: :cascade do |t|
     t.string "number", limit: 32
-    t.string "state", null: false
+    t.integer "state", default: 0, null: false
     t.string "shipment_state"
     t.string "payment_state"
     t.string "email"

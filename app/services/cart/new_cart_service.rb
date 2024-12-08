@@ -1,10 +1,9 @@
 module Cart
-  class CreateCartService
+  class NewCartService
     def initialize; end
 
     def call
-      order = Order.new(channel: "default")
-      order.save!
+      order = Order.create!
       order
     end
   end

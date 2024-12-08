@@ -28,13 +28,14 @@ module Cart
       end
 
       # 0 db operation
-      order.state = :cart
-      order.payment_state = nil
-      order.currency ||= order.store.default_currency
-      order.subtotal = order.line_items.sum(&:total)
-      order.adjustment_total = order.adjustments.sum(&:amount)
-      order.total = order.subtotal + order.adjustment_total
-      order.paid_total = 0
+      order.assign_attributes(
+        payment_state: nil,
+        currency: order.currency || order.store.default_currency,
+        subtotal: order.line_items.sum(&:total),
+        adjustment_total: order.adjustments.sum(&:amount),
+        total: order.subtotal + order.adjustment_total,
+        paid_total: 0
+      )
 
       # 10 operation
       ActiveRecord::Base.logger = Logger.new(STDOUT)
