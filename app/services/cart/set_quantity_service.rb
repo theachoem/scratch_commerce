@@ -28,11 +28,11 @@ module Cart
     def set_quantity
       # 1 db operation
       variant = Variant.find(variant_id)
-      raise QuantityNotFulfill, "Item only available #{variant.total_inventory_units}" unless variant.can_fulfill?(quantity)
+      raise Exceptions::Cart::QuantityNotFulfill, "Item only available #{variant.total_inventory_units}" unless variant.can_fulfill?(quantity)
 
       # 1 db operation
       order = Order.find(order_id)
-      raise CartDoesNotAllowedToAddItem, "Current cart #{order.state}" unless order.allowed_modify_item?
+      raise Exceptions::Cart::CartDoesNotAllowedToAddItem, "Current cart #{order.state}" unless order.allowed_modify_item?
 
       # 1 db operation
       order.line_items.where(variant_id: variant_id).update_all(quantity: quantity)

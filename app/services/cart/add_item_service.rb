@@ -1,7 +1,4 @@
 module Cart
-  class QuantityNotFulfill < StandardError; end
-  class CartDoesNotAllowedToAddItem < StandardError; end
-
   class AddItemService
     attr_reader :order_id, :variant_id, :quantity, :error
 
@@ -31,11 +28,11 @@ module Cart
     def add_item
       # 1 db operation
       variant = Variant.find(variant_id)
-      raise QuantityNotFulfill, "Item only available #{variant.total_inventory_units}" unless variant.can_fulfill?(quantity)
+      raise Exceptions::Cart::QuantityNotFulfill, "Item only available #{variant.total_inventory_units}" unless variant.can_fulfill?(quantity)
 
       # 1 db operation
       order = Order.find(order_id)
-      raise CartDoesNotAllowedToAddItem, "Current cart #{order.state}" unless order.allowed_modify_item?
+      raise Exceptions::Cart::CartDoesNotAllowedToAddItem, "Current cart #{order.state}" unless order.allowed_modify_item?
 
       # 2 db operation
       order.line_items << construct_item(order, variant, quantity)
